@@ -1,0 +1,12 @@
+{
+  "name": "witty-weasel",
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "start": "node server/witty-weasel.js"
+  },
+  "dependencies": {
+    "esbuild": "^0.20.0",
+    "express": "^5.1.0"
+  }
+}
