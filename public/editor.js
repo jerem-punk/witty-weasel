@@ -2,6 +2,14 @@ const devLink = document.getElementById('dev-link');
 const buildButton = document.getElementById('build');
 const bookmarkletLink = document.getElementById('bookmarklet-link');
 
+function debounce(fn, delay) {
+  let timeout;
+  return function (...args) {
+    clearTimeout(timeout);
+    timeout = setTimeout(() => fn.apply(this, args), delay);
+  };
+}
+
 const cm = CodeMirror.fromTextArea(document.getElementById('editor'), {
   lineNumbers: true,
   mode: 'javascript',
@@ -17,15 +25,16 @@ fetch('/code')
     cm.setValue(code);
   });
 
-// Envoyer le code à chaque changement
-cm.on('change', () => {
+const debouncedUpdate = debounce(() => {
   const code = cm.getValue();
   fetch('/update', {
     method: 'POST',
     headers: { 'Content-Type': 'text/plain' },
     body: code
   });
-});
+}, 1500);
+
+cm.on('change', debouncedUpdate);
 
 // Build le bookmarklet et met à jour le lien final
 buildButton.addEventListener('click', () => {
