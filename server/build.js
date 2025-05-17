@@ -2,7 +2,6 @@ import fs from 'fs';
 import esbuild from 'esbuild';
 
 export async function buildBookmarklet(code) {
-  console.log('buildBookmarklet');
   fs.mkdirSync('./temp', { recursive: true });
   fs.writeFileSync('./temp/input.js', code);
 
