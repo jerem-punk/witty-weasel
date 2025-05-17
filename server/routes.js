@@ -1,4 +1,3 @@
-// server/routes.js
 import { currentCode, updateCode, bookmarkletCode, updateBookmarklet } from './state.js';
 import { buildBookmarklet } from './build.js';
 

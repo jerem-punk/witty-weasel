@@ -1,32 +1,31 @@
-const textarea = document.getElementById('code');
 const devLink = document.getElementById('dev-link');
 const buildButton = document.getElementById('build');
 const bookmarkletLink = document.getElementById('bookmarklet-link');
+
+const cm = CodeMirror.fromTextArea(document.getElementById('editor'), {
+  lineNumbers: true,
+  mode: 'javascript',
+  theme: 'default', // tu pourras en changer
+  tabSize: 2,
+  indentWithTabs: false
+});
 
 // Charger le code actuel
 fetch('/code')
   .then(r => r.text())
   .then(code => {
-    textarea.value = code;
-    updateDevLink(code);
+    cm.setValue(code);
   });
 
 // Envoyer le code à chaque changement
-textarea.addEventListener('input', () => {
-  const code = textarea.value;
+cm.on('change', () => {
+  const code = cm.getValue();
   fetch('/update', {
     method: 'POST',
     headers: { 'Content-Type': 'text/plain' },
     body: code
   });
-  updateDevLink(code);
 });
-
-// Met à jour le lien de dev bookmarklet
-function updateDevLink(code) {
-  const encoded = encodeURIComponent(code);
-  devLink.href = `javascript:(()=>{${code}})()`;
-}
 
 // Build le bookmarklet et met à jour le lien final
 buildButton.addEventListener('click', () => {
