@@ -31,12 +31,8 @@ app.get('/bookmarklet.js', (req, res) => {
 });
 
 // Routes POST
-app.post('/update', (req, res) => {
+app.post('/update', async (req, res) => {
   weaselContext.source = req.body;
-  res.send('ok');
-});
-
-app.post('/build', async (req, res) => {
   await buildBookmarklet(weaselContext);
   if (weaselContext.error) {
     res.status(500).send(weaselContext.error);

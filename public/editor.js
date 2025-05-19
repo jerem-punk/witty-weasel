@@ -26,12 +26,12 @@ function displayBuildError(message) {
 const cm = CodeMirror.fromTextArea(document.getElementById('editor'), {
   lineNumbers: true,
   mode: 'javascript',
-  theme: 'default', // tu pourras en changer
+  theme: 'default',
   tabSize: 2,
   indentWithTabs: false
 });
 
-// Charger le code actuel
+// load current code
 fetch('/code')
   .then(r => r.text())
   .then(code => {
@@ -44,23 +44,19 @@ const debouncedUpdate = debounce(() => {
     method: 'POST',
     headers: { 'Content-Type': 'text/plain' },
     body: code
+  })
+  .then(async res => {
+    const text = await res.text();
+    if (!res.ok) {
+      throw new Error(text);
+    }
+    bookmarkletLink.href = text;
+    displayBuildError(null);
+  })
+  .catch(err => {
+    displayBuildError(err.message);
   });
 }, 1500);
 
 cm.on('change', debouncedUpdate);
 
-// Build le bookmarklet et met à jour le lien final
-buildButton.addEventListener('click', () => {
-  fetch('/build', { method: 'POST' })
-    .then(async res => {
-      const text = await res.text();
-      if (!res.ok) {
-        throw new Error(text);
-      }
-      bookmarkletLink.href = text;
-      displayBuildError(null);
-    })
-    .catch(err => {
-      displayBuildError(err.message); // À toi de définir cette fonction
-    });
-});
