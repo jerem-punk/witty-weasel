@@ -10,6 +10,19 @@ function debounce(fn, delay) {
   };
 }
 
+function displayBuildError(message) {
+  const errorDiv = document.getElementById('error');
+  if (!message) {
+    errorDiv.style.display = 'none';
+    errorDiv.textContent = '';
+    bookmarkletLink.style.display = '';
+  } else {
+    errorDiv.textContent = message;
+    errorDiv.style.display = 'block';
+    bookmarkletLink.style.display = 'none';
+  }
+}
+
 const cm = CodeMirror.fromTextArea(document.getElementById('editor'), {
   lineNumbers: true,
   mode: 'javascript',
@@ -39,8 +52,15 @@ cm.on('change', debouncedUpdate);
 // Build le bookmarklet et met à jour le lien final
 buildButton.addEventListener('click', () => {
   fetch('/build', { method: 'POST' })
-    .then(r => r.text())
-    .then(bookmarklet => {
-      bookmarkletLink.href = bookmarklet;
+    .then(async res => {
+      const text = await res.text();
+      if (!res.ok) {
+        throw new Error(text);
+      }
+      bookmarkletLink.href = text;
+      displayBuildError(null);
+    })
+    .catch(err => {
+      displayBuildError(err.message); // À toi de définir cette fonction
     });
 });

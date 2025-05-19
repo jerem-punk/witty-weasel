@@ -10,6 +10,7 @@ const app = express();
 const weaselContext = {
   source: `alert('hello from witty weasel');`,
   built: '',
+  error: '',
 };
 
 app.use(express.urlencoded({ extended: true }));
@@ -36,9 +37,12 @@ app.post('/update', (req, res) => {
 });
 
 app.post('/build', async (req, res) => {
-  const bookmarklet = await buildBookmarklet(weaselContext.source);
-  weaselContext.built = bookmarklet;
-  res.send(bookmarklet);
+  await buildBookmarklet(weaselContext);
+  if (weaselContext.error) {
+    res.status(500).send(weaselContext.error);
+  } else {
+    res.send(weaselContext.built);
+  }
 });
 
 // Start server
