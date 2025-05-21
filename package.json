@@ -5,6 +5,9 @@
   "scripts": {
     "start": "node server/witty-weasel.js"
   },
+  "bin": {
+    "witty-weasel": "./bin/witty-weasel.js"
+  },
   "dependencies": {
     "esbuild": "^0.20.0",
     "express": "^5.1.0"
