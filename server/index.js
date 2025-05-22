@@ -8,6 +8,7 @@ const __dirname = path.dirname(__filename);
 const app = express();
 
 const weaselContext = {
+  projectRoot: process.cwd(),
   source: `alert('hello from witty weasel');`,
   built: '',
   error: '',
@@ -44,5 +45,5 @@ app.post('/update', async (req, res) => {
 // Start server
 const port = 3000;
 app.listen(port, () => {
-  console.log(`🚀 Witty Weasel ready on http://localhost:${port}/`);
+  console.log(`🚀 Witty Weasel ready on http://localhost:${port}/ with working directory: ${weaselContext.projectRoot}`);
 });
