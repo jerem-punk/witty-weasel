@@ -2,14 +2,21 @@ import express from 'express';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import { buildBookmarklet } from './build.js';
+import { existsSync, readFileSync } from 'fs';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const app = express();
 
+let source = `alert('hello from witty weasel');`;
+const sourcePath = path.join(process.cwd(), 'src/input.js');
+if (existsSync(sourcePath)) {
+  source = readFileSync(sourcePath, { encoding: 'utf8' });
+}
+
 const weaselContext = {
   projectRoot: process.cwd(),
-  source: `alert('hello from witty weasel');`,
+  source: source,
   built: '',
   error: '',
 };
