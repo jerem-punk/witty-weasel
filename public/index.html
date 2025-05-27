@@ -24,11 +24,11 @@
   <div id="error"></div>
 
   <div id="links">
-    <a href="javascript:(async()=>{const r=await fetch('http://localhost:3000/code');const t=await r.text();eval(t);})()" id="dev-link">
-      [Dev Bookmarklet]
+    <a href="javascript:(async()=>{const r=await fetch('http://localhost:3000/code?_=' + Date.now());const t=await r.text();eval(t);})()" id="dev-link">
+      DEV BOOKMARKLET
     </a>
 
-    <a id="bookmarklet-link" href="#" download>🔗 Bookmarklet buildé</a>
+    <a id="bookmarklet-link" href="#" download>BUILT BOOKMARKLET</a>
   </div>
 
   <script src="/editor.js"></script>

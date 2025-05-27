@@ -18,7 +18,11 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, '../public')));
 app.use(express.text({ type: 'text/plain' }));
 
-// Routes GET
+app.use((req, res, next) => {
+  res.set('Access-Control-Allow-Origin', '*');
+  next();
+});
+
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, '../public/index.html'));
 });
