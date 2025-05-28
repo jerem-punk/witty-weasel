@@ -45,6 +45,9 @@ fetch('/code')
 
 const debouncedUpdate = debounce(() => {
   const code = cm.getValue();
+  const indicator = document.getElementById('build-indicator');
+  indicator.style.display = 'inline';
+
   fetch('/update', {
     method: 'POST',
     headers: { 'Content-Type': 'text/plain' },
@@ -62,6 +65,9 @@ const debouncedUpdate = debounce(() => {
   .catch(err => {
     weasel.built = '';
     displayBuildError(err.message);
+  })
+  .finally(() => {
+    indicator.style.display = 'none';
   });
 }, 1500);
 
