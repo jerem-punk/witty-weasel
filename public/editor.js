@@ -28,6 +28,10 @@ function displayBuildError(message) {
   }
 }
 
+function displayBookmarkletSize(size) {
+  document.querySelector('#bookmarklet-size').textContent = size;
+}
+
 const cm = CodeMirror.fromTextArea(document.getElementById('editor'), {
   lineNumbers: true,
   mode: 'javascript',
@@ -59,7 +63,9 @@ const debouncedUpdate = debounce(() => {
       throw new Error(text);
     }
     weasel.built = text;
-    bookmarkletLink.href = 'javascript:' + encodeURIComponent(text);
+    const bookmarkletCode = 'javascript:' + encodeURIComponent(text);
+    displayBookmarkletSize(Math.round(bookmarkletCode.length / 1024) + 'kb');
+    bookmarkletLink.href = bookmarkletCode;
     displayBuildError(null);
   })
   .catch(err => {
@@ -69,7 +75,7 @@ const debouncedUpdate = debounce(() => {
   .finally(() => {
     indicator.style.display = 'none';
   });
-}, 1500);
+}, 1000);
 
 cm.on('change', debouncedUpdate);
 
