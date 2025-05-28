@@ -27,7 +27,7 @@ export async function buildBookmarklet(weaselContext) {
     });
 
     weaselContext.error = '';
-    weaselContext.built = 'javascript:' + encodeURIComponent(result.outputFiles[0].text);
+    weaselContext.built = result.outputFiles[0].text;
 
     fs.writeFileSync(distPath, weaselContext.built);
 

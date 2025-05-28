@@ -2,6 +2,11 @@ const devLink = document.getElementById('dev-link');
 const buildButton = document.getElementById('build');
 const bookmarkletLink = document.getElementById('bookmarklet-link');
 
+let weasel = {
+  source: '',
+  built: '',
+}
+
 function debounce(fn, delay) {
   let timeout;
   return function (...args) {
@@ -50,13 +55,33 @@ const debouncedUpdate = debounce(() => {
     if (!res.ok) {
       throw new Error(text);
     }
-    bookmarkletLink.href = text;
+    weasel.built = text;
+    bookmarkletLink.href = 'javascript:' + encodeURIComponent(text);
     displayBuildError(null);
   })
   .catch(err => {
+    weasel.built = '';
     displayBuildError(err.message);
   });
 }, 1500);
 
 cm.on('change', debouncedUpdate);
 
+document.getElementById('copy-button').addEventListener('click', () => {
+  const builtLink = document.getElementById('built-link');
+  const code = weasel.built;
+
+  if (code) {
+    navigator.clipboard.writeText(code)
+      .then(() => {
+        document.getElementById('copy-status').textContent = 'Copied!';
+        setTimeout(() => {
+          document.getElementById('copy-status').textContent = '';
+        }, 1500);
+      })
+      .catch(err => {
+        console.error('Clipboard copy failed:', err);
+        document.getElementById('copy-status').textContent = '❌ Failed';
+      });
+  }
+});
