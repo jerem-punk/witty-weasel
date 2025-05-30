@@ -2,12 +2,11 @@
   "name": "witty-weasel",
   "version": "0.1.0",
   "type": "module",
-  "scripts": {
-    "start": "node server/witty-weasel.js"
-  },
   "bin": {
     "witty-weasel": "./bin/witty-weasel.js"
   },
+  "author": "jerem-punk",
+  "license": "WTFPL",
   "dependencies": {
     "esbuild": "^0.20.0",
     "express": "^5.1.0"

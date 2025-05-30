@@ -1,26 +1,17 @@
 body {
-  margin: 0;
-  padding: 0;
   font-family: sans-serif;
 }
 
-#editor {
-  border: 1px solid black;
-  padding: 0.2em;
-  width: 70%;
-  height: 100vh;
-  float: left;
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
   box-sizing: border-box;
-  font-family: monospace;
-  font-size: 14px;
-  padding: 1em;
 }
 
 #weaseal-title {
-  float: right;
-  width: 30%;
-  text-align: center;
   padding: 1em 0;
+  display: inline-block;
 }
 
 #weaseal-title h1 {
@@ -28,22 +19,31 @@ body {
   font-size: 1.5em;
 }
 
-#links,
-#copy-button,
-#copy-status {
-  float: right;
-  width: 30%;
-  text-align: center;
-  padding: 1em 0;
-  clear: both;
+#links {
+  display: inline;
+  position: absolute;
+  right: 0;
 }
 
+#copy-to-clipboard,
 #bookmarklet-link,
 #dev-link {
-  display: block;
-  margin: 1em auto;
+  display: inline-block;
   font-size: 1.2em;
 }
+
+.bookmarklet {
+  color: #0055cc;
+  font-weight: bold;
+  padding: 0.2em 0;
+  display: inline-block;
+  transition: color 0.6s ease;
+}
+
+.bookmarklet:hover {
+  color: #003399;
+}
+
 
 #build-indicator,
 #error {
@@ -53,4 +53,26 @@ body {
   transform: translateX(-50%);
   text-align: center;
   z-index: 10;
+  border-radius: 0 0 0.5em 0.5em;
+}
+
+#error {
+  color: red;
+  border: 1px solid red;
+  border-top: none;
+}
+
+#editor-container {
+  height: 70vh;
+}
+
+#editor {
+  height: 100%;
+  width: 100%;
+}
+
+.CodeMirror {
+  height: 100% !important;
+  width: 100%;
+  box-sizing: border-box;
 }

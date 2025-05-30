@@ -8,7 +8,7 @@
   
 
 
-<!-- CodeMirror CDN (style + JS modules) -->
+<!-- CodeMirror -->
   <link rel="stylesheet" href="/vendor/codemirror/codemirror.min.css">
   <script src="/vendor/codemirror/codemirror.min.js"></script>
   <script src="/vendor/codemirror/javascript.min.js"></script>
@@ -17,11 +17,33 @@
 
 </head>
 <body>
-  <div id="#weaseal-title">
+  <div id="weaseal-title">
     <h1><img src="/witty-weasel.png"> Witty Weasel</h1>
   </div>
 
-  <textarea id="editor"></textarea>
+  <div id="links">
+    <div id="copy-to-clipboard">
+      <button id="copy-button">📋 Copy to Clipboard</button>
+      <span id="copy-status" style="margin-left: 1em; color: green;"></span>
+    </div>
+
+
+    <a id="dev-link" class="bookmarklet"
+      href="javascript:(async()=>{const r=await fetch('http://localhost:3000/code?_=' + Date.now());const t=await r.text();eval(t);})()">
+      DEV
+    </a>
+
+    <a id="bookmarklet-link" class="bookmarklet" href="#">
+      BUILT
+      <span id="bookmarklet-size"></span>
+    </a>
+  
+  </div>
+  
+
+  <div id="editor-container">
+    <textarea id="editor"></textarea>
+  </div>
 
   <div id="indicators">
     <span id="build-indicator" style="margin-left: 1em; color: orange; display: none;">⏳ Building…</span>
@@ -29,18 +51,14 @@
 
   <div id="error"></div>
 
-  <button id="copy-button">📋 Copy to Clipboard</button>
-  <span id="copy-status" style="margin-left: 1em; color: green;"></span>
 
 
-  <div id="links">
-    <a href="javascript:(async()=>{const r=await fetch('http://localhost:3000/code?_=' + Date.now());const t=await r.text();eval(t);})()" id="dev-link">
-      DEV BOOKMARKLET
-    </a>
 
-    <a id="bookmarklet-link" href="#" download>BUILT BOOKMARKLET</a>
-    <span id="bookmarklet-size"></span>
-  </div>
+
+
+
+
+
 
   <script src="/editor.js"></script>
 </body>
