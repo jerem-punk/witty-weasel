@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <title>Witty Weasel</title>
   <link rel="icon" type="image/png" href="/favicon.png">
-  <link rel="stylesheet" href="/_weasel.css" />
+  <link rel="stylesheet" href="/weasel.css" />
   
 
 
@@ -17,16 +17,21 @@
 
 </head>
 <body>
-  <h1><img src="/witty-weasel.png"> Witty Weasel</h1>
+  <div id="#weaseal-title">
+    <h1><img src="/witty-weasel.png"> Witty Weasel</h1>
+  </div>
 
   <textarea id="editor"></textarea>
 
-  <span id="build-indicator" style="margin-left: 1em; color: orange; display: none;">⏳ Building…</span>
+  <div id="indicators">
+    <span id="build-indicator" style="margin-left: 1em; color: orange; display: none;">⏳ Building…</span>
+  </div>
+
+  <div id="error"></div>
 
   <button id="copy-button">📋 Copy to Clipboard</button>
   <span id="copy-status" style="margin-left: 1em; color: green;"></span>
 
-  <div id="error"></div>
 
   <div id="links">
     <a href="javascript:(async()=>{const r=await fetch('http://localhost:3000/code?_=' + Date.now());const t=await r.text();eval(t);})()" id="dev-link">

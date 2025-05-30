@@ -1,76 +1,56 @@
 body {
-    background-color: #f4f4f4;
-    font-family: sans-serif;
-    color: #333;
-    margin: 0;
-    padding: 2rem;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-  
-  h1, h2 {
-    margin-bottom: 1rem;
-    color: #222;
-  }
-  
-  .container {
-    width: 100%;
-    max-width: 800px;
-  }
-  
-.CodeMirror {
-  height: 80vh;
-  border: 1px solid #ccc;
-  border-radius: 6px;
-  background-color: #fff;
-  font-family: Consolas, monospace;
-  min-width: 50em;
-}
-  
-  button, .bookmarklet-link, .build-link {
-    display: inline-block;
-    padding: 0.5rem 1rem;
-    margin-top: 1rem;
-    margin-right: 0.5rem;
-    font-size: 14px;
-    background-color: #4a90e2;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    text-decoration: none;
-    cursor: pointer;
-    transition: background-color 0.2s ease;
-  }
-  
-  button:hover, .bookmarklet-link:hover, .build-link:hover {
-    background-color: #357abd;
-  }
-  
-  .feedback {
-    margin-top: 1rem;
-    font-size: 14px;
-    color: #27ae60;
-  }
-  
-  a.bookmarklet-link, a.build-link {
-    color: white;
-  }
-  
-  .footer {
-    margin-top: 2rem;
-    font-size: 13px;
-    color: #666;
-  }
-
-#error {
-  display: none;
-  margin-top: 1em;
-  padding: 0.75em 1em;
-  background-color: #ffe6e6;
-  color: #a00000;
-  border: 1px solid #f5c2c2;
-  border-radius: 4px;
+  margin: 0;
+  padding: 0;
   font-family: sans-serif;
-  white-space: pre-wrap;
+}
+
+#editor {
+  border: 1px solid black;
+  padding: 0.2em;
+  width: 70%;
+  height: 100vh;
+  float: left;
+  box-sizing: border-box;
+  font-family: monospace;
+  font-size: 14px;
+  padding: 1em;
+}
+
+#weaseal-title {
+  float: right;
+  width: 30%;
+  text-align: center;
+  padding: 1em 0;
+}
+
+#weaseal-title h1 {
+  margin: 0;
+  font-size: 1.5em;
+}
+
+#links,
+#copy-button,
+#copy-status {
+  float: right;
+  width: 30%;
+  text-align: center;
+  padding: 1em 0;
+  clear: both;
+}
+
+#bookmarklet-link,
+#dev-link {
+  display: block;
+  margin: 1em auto;
+  font-size: 1.2em;
+}
+
+#build-indicator,
+#error {
+  position: absolute;
+  top: 0.5em;
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+  z-index: 10;
 }
