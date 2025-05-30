@@ -4,13 +4,10 @@ import path from 'path';
 
 export async function buildBookmarklet(weaselContext) {
   const code = weaselContext.source;
-  const srcDir = path.join(weaselContext.projectRoot, 'src');
-  const distDir = path.join(weaselContext.projectRoot, 'dist');
-  const distPath = path.join(distDir, 'dist.js');
-  const inputPath = path.join(srcDir, 'input.js');
+  const inputPath = path.join(weaselContext.projectRoot, 'input.js');
+  const distPath = path.join(weaselContext.projectRoot, 'built.js');
+  const bookmarkletPath = path.join(weaselContext.projectRoot, 'bookmarklet.txt');
 
-  fs.mkdirSync(srcDir, { recursive: true });
-  fs.mkdirSync(distDir, { recursive: true });
   fs.writeFileSync(inputPath, code);
 
   try {
@@ -30,6 +27,7 @@ export async function buildBookmarklet(weaselContext) {
     weaselContext.built = result.outputFiles[0].text;
 
     fs.writeFileSync(distPath, weaselContext.built);
+    fs.writeFileSync(bookmarkletPath, 'javascript:' + encodeURIComponent(weaselContext.built));
 
   } catch(error) {
     console.error(error);
