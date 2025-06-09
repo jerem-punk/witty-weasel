@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "type": "module",
   "bin": {
-    "witty-weasel": "./bin/witty-weasel.js"
+    "witty-weasel": "bin/witty-weasel.js"
   },
   "author": "jerem-punk",
   "license": "WTFPL",
