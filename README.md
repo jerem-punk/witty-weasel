@@ -1,16 +1,54 @@
-# Witty Weasel 🐀
+# Witty Weasel
 
-**Witty Weasel** is a lightweight development environment for crafting, testing and building bookmarklets with ease and fun.
+![favicon](public/favicon.png)
 
-Bookmarklets are tiny scripts that run in your browser with a click.  
-They're like digital tricks you can keep in your bookmarks bar.  
-Developing them efficiently is often a pain: constant rebuilds, copy-pasting, and reloads…
+The sneaky little companion you never knew you needed for building bookmarklets.
 
-**Witty Weasel** makes this process smoother by letting you:
+> funny.
+>
+> as hell.
 
-- Write modular JavaScript in `src/`
-- Automatically bundle it using `esbuild --watch`
-- Serve the result on a local dev server
-- Instantly load the latest version in any tab via a single bookmarklet
+## installation
 
-It's snappy, sneaky, and smart — just like its namesake 🐀
+```bash
+npm install -g witty-weasel
+```
+
+## usage
+
+
+```bash
+# cd /path/to/my/bookmarklet/source
+witty-weasel
+```
+
+### 🧩 Using external libraries (like lodash)
+
+Need lodash? No problem.
+
+Just install it in your bookmarklet folder:
+
+```bash
+npm install lodash
+```
+
+Then in your code:
+
+```javascript
+import _ from 'lodash';
+
+console.log(_.shuffle([1, 2, 3, 4]));
+```
+
+Witty Weasel takes care of bundling everything into a single, minified bookmarklet.
+
+### 🛠 Dev Bookmarklet
+
+While developing, drag the DEV BOOKMARKLET into your bookmarks bar.
+
+Fetch the latest version of your script from your local server, no copy-paste needed.
+
+## want?
+
+Want unreasonably smooth bookmarklet dev?
+Weasel it
